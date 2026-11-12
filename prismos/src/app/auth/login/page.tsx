@@ -18,11 +18,6 @@ function LoginForm() {
   const errorMsg = searchParams.get('error')
   const message = searchParams.get('message')
 
-  useEffect(() => {
-    // Auto-bypass to dashboard
-    window.location.href = '/dashboard'
-  }, [])
-
   return (
     <div className="space-y-6 animate-fade-in">
       <div className="space-y-1">

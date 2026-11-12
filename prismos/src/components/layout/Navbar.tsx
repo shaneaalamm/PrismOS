@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { Sun, Moon, LogOut } from 'lucide-react'
+import { Sun, Moon, LogOut, LogIn } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import { format } from 'date-fns'
 import { createClient } from '@/lib/supabase/client'
@@ -82,14 +82,26 @@ export function Navbar({ title }: NavbarProps) {
           </button>
         )}
 
+        {/* Sign In Link */}
+        <Link
+          href="/auth/login"
+          title="Sign In / Switch Account"
+          className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-md bg-[#FAF9F5] dark:bg-[#141414] border-[1.5px] border-[#151413] dark:border-[#333333] text-[#151413] dark:text-[#F2F2EE] hover:bg-[#EAE7DD] dark:hover:bg-[#222222] transition-colors shadow-[2px_2px_0px_0px_#151413] dark:shadow-[2px_2px_0px_0px_#000000] font-mono text-xs font-bold"
+        >
+          <LogIn className="h-3.5 w-3.5" />
+          <span className="hidden sm:inline">Sign In</span>
+        </Link>
+
+        {/* Log Out Button */}
         <form action={logoutAction}>
           <button
             type="submit"
             title="Sign Out"
             aria-label="Sign Out"
-            className="flex h-8 w-8 items-center justify-center rounded-md bg-[#FAF9F5] dark:bg-[#141414] border-[1.5px] border-[#151413] dark:border-[#333333] text-[#151413] dark:text-[#F2F2EE] hover:bg-[#EA4316] hover:text-white dark:hover:bg-[#EA4316] transition-colors shadow-[2px_2px_0px_0px_#151413] dark:shadow-[2px_2px_0px_0px_#000000]"
+            className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-md bg-[#FAF9F5] dark:bg-[#141414] border-[1.5px] border-[#151413] dark:border-[#333333] text-[#151413] dark:text-[#F2F2EE] hover:bg-[#EA4316] hover:text-white dark:hover:bg-[#EA4316] transition-colors shadow-[2px_2px_0px_0px_#151413] dark:shadow-[2px_2px_0px_0px_#000000] font-mono text-xs font-bold"
           >
             <LogOut className="h-3.5 w-3.5" />
+            <span className="hidden sm:inline">Log Out</span>
           </button>
         </form>
       </div>

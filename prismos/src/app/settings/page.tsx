@@ -1,14 +1,16 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Link from 'next/link'
 import { useTheme } from 'next-themes'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { User, Palette, Bell, Database, Shield, Sun, Moon, Monitor, Save, Loader2, Trash2 } from 'lucide-react'
+import { User, Palette, Bell, Database, Shield, Sun, Moon, Monitor, Save, Loader2, Trash2, LogOut, LogIn } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { toast } from '@/components/ui/toaster'
 import { getProfile, updateProfile } from '@/lib/db'
+import { logoutAction } from '@/app/auth/actions'
 
 type Section = 'profile' | 'appearance' | 'notifications' | 'data' | 'account'
 
@@ -247,20 +249,52 @@ export default function SettingsPage() {
 
           {/* ACCOUNT SECTION */}
           {activeSection === 'account' && (
-            <div className="glass-card p-6 md:p-8 animate-fade-in border border-rose-200/50 dark:border-rose-500/20 bg-rose-50/30 dark:bg-rose-500/5 relative overflow-hidden">
-               <div className="absolute top-0 right-0 p-10 opacity-[0.03] pointer-events-none text-rose-500"><Shield className="w-64 h-64" /></div>
-              <div className="mb-8 pb-6 border-b border-rose-100 dark:border-rose-500/10 relative z-10">
-                <h2 className="text-2xl font-black tracking-tight text-rose-600 dark:text-rose-400 flex items-center gap-2"><Trash2 className="h-6 w-6" /> Danger Zone</h2>
-                <p className="text-[11px] font-bold text-rose-400/70 mt-1 uppercase tracking-widest">Irreversible actions for your account</p>
-              </div>
-              <div className="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 rounded-2xl bg-white/60 dark:bg-slate-900/50 border border-rose-100 dark:border-rose-500/20">
-                <div>
-                  <p className="text-[15px] font-bold text-slate-800 dark:text-slate-100">Delete Account</p>
-                  <p className="text-[11px] font-bold text-slate-400 mt-1 uppercase tracking-widest">Permanently erase all your data and progress.</p>
+            <div className="space-y-6 animate-fade-in">
+              <div className="glass-card p-6 md:p-8 border border-slate-200 dark:border-white/10 bg-white/40 dark:bg-slate-900/40 relative overflow-hidden">
+                <div className="mb-6 pb-4 border-b border-slate-200 dark:border-white/10">
+                  <h2 className="text-xl font-black tracking-tight text-slate-800 dark:text-slate-100 flex items-center gap-2">
+                    <User className="h-5 w-5 text-[#EA4316]" /> Active Session
+                  </h2>
+                  <p className="text-[11px] font-bold text-slate-400 mt-1 uppercase tracking-widest">
+                    Manage your current authentication and login state
+                  </p>
                 </div>
-                <Button variant="destructive" className="h-10 rounded-xl font-bold px-6 bg-rose-500 hover:bg-rose-600 shadow-md w-full sm:w-auto" onClick={() => toast({ title: 'Contact support to delete account', variant: 'destructive' })}>
-                  Delete Account
-                </Button>
+
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 rounded-2xl bg-white/60 dark:bg-slate-900/50 border border-slate-200/60 dark:border-white/10">
+                  <div>
+                    <p className="text-[15px] font-bold text-slate-800 dark:text-slate-100">{profile.full_name || 'Active Student'}</p>
+                    <p className="text-[12px] font-mono text-slate-500 mt-0.5">{profile.email || 'student@galgotiasuniversity.edu.in'}</p>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Link href="/auth/login">
+                      <Button variant="outline" className="h-10 rounded-xl font-bold px-4 gap-2">
+                        <LogIn className="h-4 w-4" /> Switch Account
+                      </Button>
+                    </Link>
+                    <form action={logoutAction}>
+                      <Button type="submit" variant="destructive" className="h-10 rounded-xl font-bold px-4 bg-[#EA4316] hover:bg-[#d03a11] gap-2">
+                        <LogOut className="h-4 w-4" /> Sign Out
+                      </Button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+
+              <div className="glass-card p-6 md:p-8 border border-rose-200/50 dark:border-rose-500/20 bg-rose-50/30 dark:bg-rose-500/5 relative overflow-hidden">
+                <div className="absolute top-0 right-0 p-10 opacity-[0.03] pointer-events-none text-rose-500"><Shield className="w-64 h-64" /></div>
+                <div className="mb-8 pb-6 border-b border-rose-100 dark:border-rose-500/10 relative z-10">
+                  <h2 className="text-2xl font-black tracking-tight text-rose-600 dark:text-rose-400 flex items-center gap-2"><Trash2 className="h-6 w-6" /> Danger Zone</h2>
+                  <p className="text-[11px] font-bold text-rose-400/70 mt-1 uppercase tracking-widest">Irreversible actions for your account</p>
+                </div>
+                <div className="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 rounded-2xl bg-white/60 dark:bg-slate-900/50 border border-rose-100 dark:border-rose-500/20">
+                  <div>
+                    <p className="text-[15px] font-bold text-slate-800 dark:text-slate-100">Delete Account</p>
+                    <p className="text-[11px] font-bold text-slate-400 mt-1 uppercase tracking-widest">Permanently erase all your data and progress.</p>
+                  </div>
+                  <Button variant="destructive" className="h-10 rounded-xl font-bold px-6 bg-rose-500 hover:bg-rose-600 shadow-md w-full sm:w-auto" onClick={() => toast({ title: 'Contact support to delete account', variant: 'destructive' })}>
+                    Delete Account
+                  </Button>
+                </div>
               </div>
             </div>
           )}

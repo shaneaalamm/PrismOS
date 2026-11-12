@@ -1,0 +1,10 @@
+node_modules
+.next
+.env.local
+.vercel
+ml/
+
+# Agents & temporary files
+.agents/
+skills-lock.json
+structure.txt

@@ -1,0 +1,287 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* ── LIGHT MODE: Warm Archival Newsprint & Editorial Telemetry ── */
+  :root {
+    --background: 45 23% 95%;       /* #F6F5F0 warm paper */
+    --foreground: 40 6% 8%;         /* #151413 deep ink black */
+    --card: 45 27% 97%;             /* #FAF9F5 crisp paper card */
+    --card-foreground: 40 6% 8%;
+    --popover: 45 27% 97%;
+    --popover-foreground: 40 6% 8%;
+    --primary: 150 37% 17%;         /* #1B3B2B forest green */
+    --primary-foreground: 45 23% 96%;
+    --secondary: 43 18% 90%;        /* #EAE7DD warm stone */
+    --secondary-foreground: 40 6% 12%;
+    --muted: 43 16% 89%;            /* #E8E5DB */
+    --muted-foreground: 38 6% 40%;  /* #6B6860 */
+    --accent: 13 84% 50%;           /* #EA4316 vermilion orange */
+    --accent-foreground: 0 0% 100%;
+    --destructive: 13 84% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 40 6% 12%;            /* #1F1E1C crisp ink border */
+    --input: 40 10% 80%;
+    --ring: 150 37% 17%;
+    --radius: 0.625rem;             /* 10px disciplined hardware radius */
+
+    /* Telemetry surface tints */
+    --surface-violet: 150 20% 92%;
+    --surface-blue:   45 18% 91%;
+    --surface-emerald:150 25% 91%;
+    --surface-amber:  13 75% 93%;
+    --surface-rose:   13 80% 93%;
+    --surface-cyan:   45 18% 91%;
+  }
+
+  /* ── DARK MODE: Pitch Black & Pure Neutral Dark Grays (ZERO Blue Undertones) ── */
+  .dark {
+    --background: 0 0% 2%;          /* #050505 pure pitch black */
+    --foreground: 45 14% 94%;       /* #F2F2EE warm crisp off-white */
+    --card: 0 0% 7%;                /* #121212 pure neutral charcoal */
+    --card-foreground: 45 14% 94%;
+    --popover: 0 0% 7%;
+    --popover-foreground: 45 14% 94%;
+    --primary: 13 90% 55%;          /* #FF4D1C vibrant vermilion */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 11%;          /* #1C1C1C neutral dark gray */
+    --secondary-foreground: 0 0% 88%;
+    --muted: 0 0% 10%;              /* #1A1A1A */
+    --muted-foreground: 0 0% 56%;   /* #8F8F8F neutral mid-gray */
+    --accent: 0 0% 14%;             /* #242424 */
+    --accent-foreground: 45 14% 94%;
+    --destructive: 13 90% 55%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 20%;             /* #333333 neutral dark border */
+    --input: 0 0% 16%;
+    --ring: 13 90% 55%;
+
+    --surface-violet: 0 0% 11%;
+    --surface-blue:   0 0% 11%;
+    --surface-emerald:150 35% 13%;
+    --surface-amber:  13 50% 14%;
+    --surface-rose:   13 50% 14%;
+    --surface-cyan:   0 0% 11%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    box-sizing: border-box;
+  }
+  html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-[#F6F5F0] dark:bg-[#050505] text-[#151413] dark:text-[#F2F2EE] antialiased;
+    font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+    font-feature-settings: "rlig" 1, "calt" 1, "tnum" 1;
+  }
+  ::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #8E8B82;
+    border-radius: 99px;
+  }
+  .dark ::-webkit-scrollbar-thumb {
+    background: #2E2E2E;
+  }
+  ::selection {
+    background: #EA4316;
+    color: #FFFFFF;
+  }
+}
+
+@layer utilities {
+  /* ── NEO-BRUTALIST TELEMETRY CARD (Replaces blurry SaaS glass-card globally) ── */
+  .glass-card,
+  .telemetry-card {
+    background-color: #FAF9F5;
+    border: 2px solid #151413;
+    border-radius: 0.75rem;
+    box-shadow: 3px 3px 0px 0px #151413;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  }
+
+  .dark .glass-card,
+  .dark .telemetry-card {
+    background-color: #111111;
+    border: 1.5px solid #333333;
+    box-shadow: 3px 3px 0px 0px #000000;
+  }
+
+  /* ── DIAGONAL HATCHING FOR XAI SHAP CONFIDENCE BARS ── */
+  .hatched-bar {
+    background-image: repeating-linear-gradient(
+      -45deg,
+      #151413 0px,
+      #151413 1.5px,
+      transparent 1.5px,
+      transparent 5px
+    );
+  }
+  .dark .hatched-bar {
+    background-image: repeating-linear-gradient(
+      -45deg,
+      #B0B0B0 0px,
+      #B0B0B0 1.5px,
+      transparent 1.5px,
+      transparent 5px
+    );
+  }
+
+  /* ── PERFORATED EXAM ADMIT TICKET STUB ── */
+  .exam-ticket {
+    position: relative;
+    background-color: #FAF9F5;
+    border: 2px solid #151413;
+    border-radius: 0.5rem;
+    box-shadow: 3px 3px 0px 0px #151413;
+  }
+  .dark .exam-ticket {
+    background-color: #121212;
+    border: 1.5px solid #383838;
+    box-shadow: 3px 3px 0px 0px #000000;
+  }
+
+  /* Perforated side notches */
+  .ticket-notches {
+    background-image:
+      radial-gradient(circle at 0 50%, #F6F5F0 5px, transparent 5.5px),
+      radial-gradient(circle at 100% 50%, #F6F5F0 5px, transparent 5.5px);
+  }
+  .dark .ticket-notches {
+    background-image:
+      radial-gradient(circle at 0 50%, #050505 5px, transparent 5.5px),
+      radial-gradient(circle at 100% 50%, #050505 5px, transparent 5.5px);
+  }
+
+  /* ── Card base & semantic utilities for sub-pages ── */
+  .card-base {
+    background: hsl(var(--card));
+    border: 1.5px solid hsl(var(--border));
+    border-radius: var(--radius);
+  }
+  .card-accent-violet { border-top: 3px solid #1B3B2B; }
+  .card-accent-blue   { border-top: 3px solid #151413; }
+  .card-accent-emerald{ border-top: 3px solid #1B3B2B; }
+  .card-accent-amber  { border-top: 3px solid #EA4316; }
+  .card-accent-rose   { border-top: 3px solid #EA4316; }
+  .card-accent-cyan   { border-top: 3px solid #1B3B2B; }
+
+  .icon-violet  { background: #EAE7DD; color: #151413; }
+  .icon-blue    { background: #EAE7DD; color: #151413; }
+  .icon-emerald { background: #1B3B2B; color: #FFFFFF; }
+  .icon-amber   { background: #EA4316; color: #FFFFFF; }
+  .icon-rose    { background: #EA4316; color: #FFFFFF; }
+  .icon-cyan    { background: #EAE7DD; color: #151413; }
+
+  .dark .icon-violet,
+  .dark .icon-blue,
+  .dark .icon-cyan {
+    background: #1E1E1E;
+    color: #F2F2EE;
+  }
+
+  .stat-violet,
+  .stat-blue,
+  .stat-emerald,
+  .stat-amber,
+  .stat-rose,
+  .stat-cyan {
+    background-color: #FAF9F5;
+    border-color: #151413;
+  }
+  .dark .stat-violet,
+  .dark .stat-blue,
+  .dark .stat-emerald,
+  .dark .stat-amber,
+  .dark .stat-rose,
+  .dark .stat-cyan {
+    background-color: #111111;
+    border-color: #333333;
+  }
+
+  .gradient-text {
+    color: inherit;
+  }
+
+  .glass {
+    background: #FAF9F5;
+    border: 1.5px solid #151413;
+  }
+  .dark .glass {
+    background: #121212;
+    border: 1.5px solid #333333;
+  }
+
+  /* ── Shimmer skeleton ── */
+  .shimmer {
+    background: linear-gradient(90deg, hsl(var(--muted)) 25%, hsl(var(--secondary)) 50%, hsl(var(--muted)) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.6s ease-in-out infinite;
+    border-radius: var(--radius);
+  }
+
+  .section-label {
+    @apply text-[11px] font-mono font-bold uppercase tracking-[0.14em] text-muted-foreground;
+  }
+
+  .page-enter {
+    animation: fadeUp 0.25s ease-out forwards;
+  }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.animate-fade-in { animation: fadeUp 0.3s ease-out forwards; }
+
+@layer base {
+  input, textarea, select {
+    @apply text-[#151413] dark:text-[#F2F2EE] !important;
+  }
+  input::placeholder, textarea::placeholder {
+    @apply text-[#6E6B64] dark:text-[#777777] !important;
+  }
+  option {
+    @apply bg-[#FAF9F5] text-[#151413] dark:bg-[#121212] dark:text-[#F2F2EE] !important;
+  }
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #resume-preview, #resume-preview * {
+    visibility: visible;
+  }
+  #resume-preview {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+    border: none;
+    background: white !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+}

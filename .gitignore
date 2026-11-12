@@ -1,0 +1,34 @@
+# Node dependencies
+node_modules/
+.next/
+out/
+build/
+dist/
+
+# Python / ML artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.env
+.env.local
+
+# Vercel
+.vercel/
+
+# OS / Editor files
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/
+.idea/
+
+# Temporary / Agent logs
+*.log
+.agents/
+*.bak
+.git_old_hassan_bak/
